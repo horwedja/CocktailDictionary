@@ -1,19 +1,23 @@
-// auth.js
-import PocketBase from 'https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.20.0/pocketbase.umd.js';
-
-const pb = new PocketBase('http://pocketbase-ygkooskkgw0kk0ow0ogc8cw8.209.182.239.56.sslip.io');
-
-export async function authenticate(email, password) {
-    try {
-        const authData = await pb.collection('users').authWithPassword(email, password);
-        console.log("Token:", pb.authStore.token); // Log the token for debugging
-        return pb.authStore.token; // Return token to caller
-    } catch (error) {
-        console.error("Authentication failed:", error);
-        throw error; // Rethrow error for handling in UI
-    }
+// js/ui.js
+function showCocktails(records, container) {
+    container.innerHTML = ''; // Clear existing content
+    records.forEach(record => {
+        const div = document.createElement('div');
+        div.className = 'cocktail';
+        div.innerHTML = `
+            <h3>${record.Name || 'Unnamed Cocktail'}</h3>
+            <p><strong>Ingredients:</strong> ${record.Ingredients || 'N/A'}</p>
+            <p><strong>Instructions:</strong> ${record.Instructions || 'N/A'}</p>
+            <p><strong>Category:</strong> ${record.Category || 'N/A'}</p>
+            <p><strong>Alcoholic:</strong> ${record.Alcoholic ? 'Yes' : 'No'}</p>
+        `;
+        container.appendChild(div);
+    });
 }
 
-export function getToken() {
-    return pb.authStore.token;
+function showError(message, container) {
+    container.innerHTML = `<p class="error">${message}</p>`;
 }
+
+// Export functions to the global scope
+window.UI = { showCocktails, showError };

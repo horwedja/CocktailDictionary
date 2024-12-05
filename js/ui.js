@@ -1,5 +1,5 @@
-// ui.js
-export function showCocktails(records, container) {
+// js/ui.js
+function showCocktails(records, container) {
     container.innerHTML = ''; // Clear existing content
     records.forEach(record => {
         const div = document.createElement('div');
@@ -15,6 +15,9 @@ export function showCocktails(records, container) {
     });
 }
 
-export function showError(message, container) {
+function showError(message, container) {
     container.innerHTML = `<p class="error">${message}</p>`;
 }
+
+// Export functions for global access
+window.UI = { showCocktails, showError };
