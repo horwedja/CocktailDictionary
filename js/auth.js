@@ -1,6 +1,4 @@
 // js/auth.js
-const pb = new PocketBase('http://pocketbase-ygkooskkgw0kk0ow0ogc8cw8.209.182.239.56.sslip.io');
-
 async function authenticate(email, password) {
     try {
         const authData = await pb.collection('users').authWithPassword(email, password);
@@ -16,5 +14,4 @@ function getToken() {
     return pb.authStore.token;
 }
 
-// Attach to the global scope
 window.Auth = { authenticate, getToken };
