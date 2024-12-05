@@ -41,27 +41,36 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            console.log("Page loaded");
+
             const loginForm = document.getElementById('login-form');
             const cocktailList = document.getElementById('cocktail-list');
             const recordsDiv = document.getElementById('records');
 
             loginForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+                console.log("Form submitted");
 
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
 
                 try {
                     // Authenticate user
+                    console.log("Authenticating user...");
                     await Auth.authenticate(email, password);
+                    console.log("User authenticated successfully");
 
                     // Show cocktails after login
                     loginForm.style.display = 'none';
                     cocktailList.style.display = 'block';
 
+                    console.log("Fetching cocktails...");
                     const records = await Cocktails.fetchCocktails();
+                    console.log("Cocktails fetched:", records);
+
                     UI.showCocktails(records, recordsDiv);
                 } catch (error) {
+                    console.error("An error occurred:", error);
                     UI.showError("Failed to authenticate or fetch cocktails.", recordsDiv);
                 }
             });
