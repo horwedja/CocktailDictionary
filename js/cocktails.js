@@ -13,5 +13,6 @@ async function fetchCocktails() {
     }
 }
 
-// Export functions to the global scope
+// Attach to the global scope
 window.Cocktails = { fetchCocktails };
+console.log("cocktails.js loaded");
