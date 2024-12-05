@@ -6,6 +6,7 @@ async function fetchCocktails() {
         const records = await pb.collection('Cocktails').getFullList({
             sort: '-created', // Sort by most recently created
         });
+        console.log("Cocktails fetched:", records);
         return records; // Return records to caller
     } catch (error) {
         console.error("Failed to fetch cocktails:", error);
@@ -13,6 +14,6 @@ async function fetchCocktails() {
     }
 }
 
-// Attach to the global scope
+// Attach `fetchCocktails` to the global `window.Cocktails` object
 window.Cocktails = { fetchCocktails };
-console.log("cocktails.js loaded");
+console.log("cocktails.js loaded, Cocktails object defined:", window.Cocktails);
