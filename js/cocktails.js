@@ -1,8 +1,6 @@
 // js/cocktails.js
 console.log("cocktails.js is running...");
 
-const pb = new PocketBase('http://pocketbase-ygkooskkgw0kk0ow0ogc8cw8.209.182.239.56.sslip.io');
-
 async function fetchCocktails() {
     try {
         const records = await pb.collection('Cocktails').getFullList({
@@ -16,6 +14,5 @@ async function fetchCocktails() {
     }
 }
 
-// Attach the `fetchCocktails` function to the global `Cocktails` object
 window.Cocktails = { fetchCocktails };
 console.log("cocktails.js loaded, Cocktails object defined:", window.Cocktails);
