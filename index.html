@@ -3,9 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>PocketBase Modular App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .cocktail {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1>PocketBase Cocktails</h1>
+    <form id="login-form">
+        <h2>Login</h2>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" required><br><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <div id="cocktail-list" style="display: none;">
+        <h2>Cocktail Records</h2>
+        <div id="records"></div>
+    </div>
+
+    <script type="module">
+        import { authenticate } from './js/auth.js';
+        import { fetchCocktails } from './js/cocktails.js';
+        import { showCocktails, showError } from './js/ui.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const cocktailList = document.getElementById('cocktail-list');
+            const recordsDiv = document.getElementById('records');
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                try {
+                    // Authenticate user
+                    await authenticate(email, password);
+
+                    // Show cocktails after login
+                    loginForm.style.display = 'none';
+                    cocktailList.style.display = 'block';
+
+                    const records = await fetchCocktails();
+                    showCocktails(records, recordsDiv);
+                } catch (error) {
+                    showError("Failed to authenticate or fetch cocktails.", recordsDiv);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
