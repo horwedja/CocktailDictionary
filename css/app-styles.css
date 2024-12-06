@@ -142,7 +142,7 @@ body {
     background-color: #2980b9; /* Slightly darker blue on hover */
 }
 /* Cards Container */
-.cards-container {
+#cards-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Exactly 3 cards per row */
     gap: 20px; /* Space between cards */
@@ -153,10 +153,10 @@ body {
 }
 
 /* Individual Card */
-.card {
+#card {
     width: 100%; /* Take full width within grid cell */
     height: 250px; /* Increase height for larger cards */
-    background: url(https://design.penpot.app/assets/by-file-media-id/a0a8e792-b2d2-818e-8005-61fe755622e3) no-repeat center center / cover;
+    background: url(assets/mojito.jpg) no-repeat center center / cover;
     border-radius: 35px;
     position: relative;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a light shadow for depth */
@@ -164,7 +164,7 @@ body {
     transition: transform 0.2s ease; /* Smooth hover effect */
 }
 
-.card:hover {
+#card:hover {
     transform: scale(1.05); /* Slight zoom effect on hover */
 }
  
