@@ -1,7 +1,7 @@
 // js/dashboard.js
 document.addEventListener('DOMContentLoaded', () => {
-    const searchButton = document.querySelector('.nav-button');
-    const content = document.querySelector('.content');
+    const searchButton = document.querySelector('.nav-button'); // Search navigation button
+    const content = document.querySelector('.content'); // Main content area
 
     // Event listener for the Search button
     searchButton.addEventListener('click', () => {
@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadGallery(content);
 });
 
+// Function to load the search page
 function loadSearchPage(content) {
     content.innerHTML = `
         <h2 class="title">Search Cocktails</h2>
@@ -47,6 +48,7 @@ function loadSearchPage(content) {
 
             <button type="submit" class="search-submit">Search</button>
         </form>
+
         <div id="results" class="results">
             <h3>Results</h3>
             <p>No results to display</p>
@@ -56,10 +58,11 @@ function loadSearchPage(content) {
     const searchForm = document.getElementById('search-form');
     const resultsDiv = document.getElementById('results');
 
+    // Add event listener for the search form
     searchForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent form submission
 
-        // Get search inputs
+        // Get values from input fields
         const ingredient1 = document.getElementById('ingredient1').value.toLowerCase();
         const ingredient2 = document.getElementById('ingredient2').value.toLowerCase();
         const garnish1 = document.getElementById('garnish1').value.toLowerCase();
@@ -69,10 +72,9 @@ function loadSearchPage(content) {
         const tag = document.getElementById('tag').value.toLowerCase();
 
         try {
-            // Fetch all records from PocketBase
             const records = await pb.collection('Cocktails').getFullList();
 
-            // Filter records based on input values
+            // Filter records based on search inputs
             const filtered = records.filter(record => {
                 const matchIngredient1 = ingredient1 ? record.Ingredients.toLowerCase().includes(ingredient1) : true;
                 const matchIngredient2 = ingredient2 ? record.Ingredients.toLowerCase().includes(ingredient2) : true;
@@ -120,10 +122,13 @@ function loadSearchPage(content) {
     });
 }
 
+// Function to load the default gallery view
 function loadGallery(content) {
     content.innerHTML = `
         <h1 class="title">Welcome to the Thirst Cocktail Dictionary</h1>
         <p class="subtitle">You can use the search tool to find what you are looking for.</p>
-
+        <div class="cocktails-gallery">
+            <img src="https://via.placeholder.com/150" alt="Cocktail 1">
+        </div>
     `;
 }
