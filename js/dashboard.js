@@ -124,10 +124,6 @@ function loadGallery(content) {
     content.innerHTML = `
         <h1 class="title">Welcome to the Thirst Cocktail Dictionary</h1>
         <p class="subtitle">You can use the search tool to find what you are looking for.</p>
-        <div class="cocktails-gallery">
-            <img src="https://via.placeholder.com/150" alt="Cocktail 1">
-            <img src="https://via.placeholder.com/150" alt="Cocktail 2">
-            <img src="https://via.placeholder.com/150" alt="Cocktail 3">
-        </div>
+
     `;
 }
