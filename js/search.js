@@ -1,55 +1,94 @@
-// js/search.js
+export function loadSearchPage(content) {
+    // Load the search form into the content div
+    content.innerHTML = `
+        <h2>Search Cocktails</h2>
+        <form id="search-form" class="search-form">
+            <input type="text" id="ingredient1" placeholder="Ingredient 1">
+            <input type="text" id="ingredient2" placeholder="Ingredient 2">
+            <input type="text" id="garnish1" placeholder="Garnish 1">
+            <input type="text" id="garnish2" placeholder="Garnish 2">
+            <select id="category">
+                <option value="">Category</option>
+                <option value="Classic">Classic</option>
+                <option value="Signature">Signature</option>
+            </select>
+            <select id="alcoholic">
+                <option value="">Alcoholic</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+            <input type="text" id="tag" placeholder="Tag">
+            <button type="submit">Search</button>
+        </form>
+        <div id="results">
+            <h3>Results</h3>
+            <p>No results to display</p>
+        </div>
+    `;
 
-export async function searchCocktails() {
-    const input1 = document.getElementById('input1').value.toLowerCase();
-    const input2 = document.getElementById('input2').value.toLowerCase();
-    const input3 = document.getElementById('input3').value.toLowerCase();
-    const input4 = document.getElementById('input4').value.toLowerCase();
-    const input5 = document.getElementById('input5').value.toLowerCase();
+    const searchForm = document.getElementById('search-form');
+    const resultsDiv = document.getElementById('results');
 
-    const cardsContainer = document.getElementById('cards-container');
-    cardsContainer.style.display = 'none'; // Hide results initially
+    // Event listener for form submission
+    searchForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    try {
-        // Fetch records from PocketBase
-        const records = await pb.collection('Cocktails').getFullList();
+        // Get search criteria
+        const ingredient1 = document.getElementById('ingredient1').value.toLowerCase();
+        const ingredient2 = document.getElementById('ingredient2').value.toLowerCase();
+        const garnish1 = document.getElementById('garnish1').value.toLowerCase();
+        const garnish2 = document.getElementById('garnish2').value.toLowerCase();
+        const category = document.getElementById('category').value;
+        const alcoholic = document.getElementById('alcoholic').value;
+        const tag = document.getElementById('tag').value.toLowerCase();
 
-        // Filter records based on input values
-        const filtered = records.filter(record => {
-            const matchInput1 = input1 ? record.Ingredients.toLowerCase().includes(input1) : true;
-            const matchInput2 = input2 ? record.Ingredients.toLowerCase().includes(input2) : true;
-            const matchInput3 = input3 ? record.Garnish.toLowerCase().includes(input3) : true;
-            const matchInput4 = input4 ? record.Garnish.toLowerCase().includes(input4) : true;
-            const matchInput5 = input5 ? record.tags.toLowerCase().includes(input5) : true;
+        try {
+            const records = await pb.collection('Cocktails').getFullList(); // Fetch all cocktails
 
-            return matchInput1 && matchInput2 && matchInput3 && matchInput4 && matchInput5;
-        });
+            // Filter records based on search criteria
+            const filtered = records.filter(record => {
+                const matchIngredient1 = ingredient1 ? record.Ingredients.toLowerCase().includes(ingredient1) : true;
+                const matchIngredient2 = ingredient2 ? record.Ingredients.toLowerCase().includes(ingredient2) : true;
+                const matchGarnish1 = garnish1 ? record.Garnish.toLowerCase().includes(garnish1) : true;
+                const matchGarnish2 = garnish2 ? record.Garnish.toLowerCase().includes(garnish2) : true;
+                const matchCategory = category ? record.Category === category : true;
+                const matchAlcoholic = alcoholic ? record.Alcoholic.toString() === alcoholic : true;
+                const matchTag = tag ? record.tags.toLowerCase().includes(tag) : true;
 
-        // Display results
-        if (filtered.length > 0) {
-            cardsContainer.innerHTML = ''; // Clear previous results
-            filtered.forEach(record => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-                card.style.backgroundImage = `url(${record.image || 'https://via.placeholder.com/150'})`;
-                card.innerHTML = `
-                    <div class="card-content">
-                        <strong>${record.Name}</strong><br>
-                        <em>Ingredients:</em> ${record.Ingredients}<br>
-                        <em>Garnish:</em> ${record.Garnish}<br>
-                        <em>Tags:</em> ${record.tags}
+                return (
+                    matchIngredient1 &&
+                    matchIngredient2 &&
+                    matchGarnish1 &&
+                    matchGarnish2 &&
+                    matchCategory &&
+                    matchAlcoholic &&
+                    matchTag
+                );
+            });
+
+            // Display results
+            if (filtered.length > 0) {
+                resultsDiv.innerHTML = `
+                    <h3>Results</h3>
+                    <div class="cards-container">
+                        ${filtered.map(cocktail => `
+                            <div class="card">
+                                <h4>${cocktail.Name}</h4>
+                                <p><strong>Ingredients:</strong> ${cocktail.Ingredients}</p>
+                                <p><strong>Garnish:</strong> ${cocktail.Garnish}</p>
+                                <p><strong>Category:</strong> ${cocktail.Category}</p>
+                                <p><strong>Alcoholic:</strong> ${cocktail.Alcoholic ? 'Yes' : 'No'}</p>
+                                <p><strong>Tags:</strong> ${cocktail.tags}</p>
+                            </div>
+                        `).join('')}
                     </div>
                 `;
-                cardsContainer.appendChild(card);
-            });
-            cardsContainer.style.display = 'grid'; // Show results
-        } else {
-            cardsContainer.innerHTML = '<p>No results found</p>';
-            cardsContainer.style.display = 'block'; // Show "No results" message
+            } else {
+                resultsDiv.innerHTML = '<p>No results found</p>';
+            }
+        } catch (error) {
+            console.error("Failed to fetch cocktails:", error);
+            resultsDiv.innerHTML = '<p>Error loading results</p>';
         }
-    } catch (error) {
-        console.error('Error fetching records:', error);
-        cardsContainer.innerHTML = '<p>Error loading results</p>';
-        cardsContainer.style.display = 'block'; // Show error message
-    }
+    });
 }

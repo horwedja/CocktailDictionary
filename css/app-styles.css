@@ -13,30 +13,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Top Bar */
-.top-bar {
-    display: flex;
-    align-items: center;
-    background-color: black;
-    height: 15%;
-    color: white;
-    padding: 0 1rem;
-}
 
-/* Left Navigation Bar */
-.left-bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center horizontally */
-    justify-content: flex-start; /* Align items to the top */
-    background-color: black;
-    width: 15%; /* Fixed width for the left bar */
-    height: 100%; /* Full height */
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 0; /* Remove extra padding */
-}
 
 /* Logo */
 .logo {
@@ -45,6 +22,48 @@ body {
     object-fit: contain; /* Ensure proper scaling */
     margin: 10px; /* Remove unnecessary margins */
     padding: 10px; /* Remove unnecessary padding */
+}
+/* Left Navigation Bar */
+.left-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15%; /* Adjust to the desired width of the left bar */
+    height: 100vh; /* Full screen height */
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    z-index: 1; /* Ensure it stays on top */
+}
+
+/* Top Bar */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 15%; /* Matches the width of the left bar */
+    width: 85%; /* Remaining width after accounting for the left bar */
+    height: 10%; /* Adjust height as needed */
+    background-color: black;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: white;
+    z-index: 1; /* Stays above other elements */
+}
+
+/* Main Content Area */
+#content {
+    margin-top: 5%; /* Height of the top bar */
+    margin-left: 15%; /* Width of the left bar */
+    padding: 20px; /* Optional padding for content spacing */
+    width: 85%; /* Adjust to fit remaining screen width */
+    height: calc(100vh - 10%); /* Full height minus the top bar height */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    background-color: white; /* Optional background color */
+    box-sizing: border-box; /* Include padding and borders in width/height calculations */
 }
 
 /* Blue Navigation Button */
@@ -64,20 +83,6 @@ body {
 
 .nav-button:hover {
     background-color: #2980b9; /* Slightly darker blue on hover */
-}
-
-
-
-/* Main Content Area */
-/* Main Content Area */
-.content {
-    margin-left: 15%; /* Align content to the right of the left bar */
-    margin-top: 1%; /* Push content below the top bar */
-    padding: 20px;
-    background-color: #f4f4f4; /* Optional: Light background for distinction */
-    height: auto; /* Automatically adjust height based on content */
-    overflow: visible; /* Allow content to flow naturally */
-    box-sizing: border-box; /* Include padding in width/height calculations */
 }
 
 /* Rectangle Container */
