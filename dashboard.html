@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.20.0/pocketbase.umd.js"></script>
+    <script src="./js/pocketbase.js"></script>
+    <script src="./js/dashboard.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+        }
+        .navigation {
+            width: 200px;
+            background: #333;
+            color: white;
+            padding: 20px;
+        }
+        .navigation a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <h3>Dashboard</h3>
+        <nav id="nav-links"></nav>
+    </div>
+    <div class="content" id="content">
+        <h2>Welcome to the Dashboard</h2>
+        <p>Select an option from the navigation menu.</p>
+    </div>
+</body>
+</html>
