@@ -1,0 +1,84 @@
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    height: 10%;
+    color: white;
+    padding: 0 1rem;
+}
+
+/* Left Navigation Bar */
+.left-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: black;
+    width: 15%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 3%; /* Adds space equal to the height of the top bar */
+}
+/* Logo in the top-left corner */
+.logo {
+    width: 100%; /* Make the logo fill the width of the left bar */
+    height: auto; /* Maintain the aspect ratio of the image */
+    object-fit: contain; /* Ensure the image scales nicely within its container */
+    max-height: 100%; /* Prevent it from exceeding the height of the top bar */
+    padding: 10px; /* Optional: Add some padding for spacing */
+}
+/* Logo in the top-left corner */
+.logo {
+    width: 100%;
+    height: auto;
+    max-height: 100%; /* Adjust to fit the top and left bar */
+}
+
+/* Blue Navigation Button */
+.nav-button {
+    margin: calc(10% + 20px) auto 0; /* Adjust for the height of the top bar + some spacing */
+    padding: 10px 20px;
+    color: white;
+    background-color: #3498db; /* Blue color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.2rem;
+    width: 70%; /* Button width relative to the left bar */
+    position: relative; /* Ensures proper placement within the left bar */
+}
+
+.nav-button:hover {
+    background-color: #2980b9; /* Slightly darker blue on hover */
+}
+
+
+
+/* Main Content Area */
+.content {
+    margin-left: 25%; /* Leaves space for the left bar */
+    margin-top: 20%; /* Leaves space for the top bar */
+    padding: 20px;
+    background-color: #f4f4f4;
+    height: 80%;
+    overflow-y: auto;
+}
