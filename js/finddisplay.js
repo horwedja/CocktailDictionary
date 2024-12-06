@@ -69,7 +69,7 @@ document.getElementById('reset-btn').addEventListener('click', () => {
         // Perform search
         const results = await searchCocktails(criteria);
 
-        /*// Display results
+        // Display results
         if (results.length > 0) {
             resultsContainer.innerHTML = results.map(cocktail => `
                 <div class="card">
@@ -87,29 +87,6 @@ document.getElementById('reset-btn').addEventListener('click', () => {
 
         // Show results div
         resultsDiv.style.display = 'block';
-        */
-        // Display results in styled cards
-function displayResults(results) {
-    const resultsContainer = document.querySelector('.results-container');
-    const resultsDiv = document.getElementById('results');
-
-    if (results.length > 0) {
-        resultsContainer.innerHTML = results.map(cocktail => `
-            <div class="card">
-                <h4>${cocktail.Name}</h4>
-                <p><strong>Ingredients:</strong> ${cocktail.Ingredients}</p>
-                <p><strong>Garnish:</strong> ${cocktail.Garnish}</p>
-                <p><strong>Category:</strong> ${cocktail.Category}</p>
-                <p><strong>Alcoholic:</strong> ${cocktail.Alcoholic ? 'Yes' : 'No'}</p>
-                <p><strong>Tags:</strong> ${cocktail.tags}</p>
-            </div>
-        `).join('');
-    } else {
-        resultsContainer.innerHTML = '<p>No results found</p>';
-    }
-
-    // Show the results div
-    resultsDiv.style.display = 'block';
-}
+        console.log("Search results:", results);
     });
 }
