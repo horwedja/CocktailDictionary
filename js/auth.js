@@ -20,3 +20,4 @@ function getToken() {
 
 window.Auth = { authenticate, getToken };
 console.log("auth.js loaded");
+ 

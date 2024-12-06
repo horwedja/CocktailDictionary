@@ -4,3 +4,4 @@ export function loadWelcomePage(content) {
         <p>Use the navigation on the left to perform actions.</p>
     `;
 }
+ 
