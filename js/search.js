@@ -1,9 +1,11 @@
+import pb from './pocketbase.js';
+
 export async function searchCocktails(criteria) {
     try {
-        // Mock PocketBase API call - Replace with your real PocketBase API call
+        // Fetch all cocktail records
         const records = await pb.collection('Cocktails').getFullList();
 
-        // Filter results based on search criteria
+        // Filter records based on search criteria
         const filtered = records.filter(record => {
             const matchIngredient1 = criteria.ingredient1 ? record.Ingredients.toLowerCase().includes(criteria.ingredient1) : true;
             const matchIngredient2 = criteria.ingredient2 ? record.Ingredients.toLowerCase().includes(criteria.ingredient2) : true;
@@ -19,6 +21,6 @@ export async function searchCocktails(criteria) {
         return filtered;
     } catch (error) {
         console.error("Search failed:", error);
-        return []; // Return empty array on error
+        return [];
     }
 }
