@@ -13,25 +13,38 @@
 <body>
     <!-- Top Bar -->
     <div class="top-bar">
-        <img src="thirst.png" alt="Thirst Logo" class="logo">
+        
     </div>
 
     <!-- Left Navigation Bar -->
     <div class="left-bar">
-        <button class="nav-button">Search</button>
+        <img src="thirst.png" alt="Thirst Logo" class="logo">
+        <button class="nav-button">Find Cocktails</button>
         <button class="nav-button">Add</button>
     </div>
 
-    <!-- Main Content Area -->
-    <div class="content">
-        <h1>Welcome to Thirst</h1>
-        <p>Use the navigation to search for cocktails or explore the gallery.</p>
-        <div class="cocktails-gallery">
-            <!-- Placeholder for gallery images -->
-            <img src="https://via.placeholder.com/150" alt="Cocktail 1">
-            <img src="https://via.placeholder.com/150" alt="Cocktail 2">
-            <img src="https://via.placeholder.com/150" alt="Cocktail 3">
-        </div>
+<!-- Main Content Area -->
+<div class="content">
+    <h1>Welcome to Thirst</h1>
+    <p>Use the navigation to search for cocktails or explore the gallery.</p>
+    
+    <!-- Rectangle Container -->
+    <div class="rectangle-container">
+        <div class="rectangle"><input type="text" placeholder="Input 1"></div>
+        <div class="rectangle"><input type="text" placeholder="Input 2"></div>
+        <div class="rectangle"><input type="text" placeholder="Input 3"></div>
+        <div class="rectangle"><input type="text" placeholder="Input 4"></div>
+        <div class="rectangle"><input type="text" placeholder="Input 5"></div>
+        
     </div>
+    <div>
+    <button class="search-btn">Search</button>
+</div>
+</div>
+<div class="cards-container" id="cards-container" style="display: none;">
+    <!-- Cards will be dynamically added here -->
+</div>
+    
+</div>
 </body>
 </html>
