@@ -4,24 +4,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const content = document.getElementById('content');
 
     try {
-        // Fetch the current user
-        const user = pb.authStore.model;
-        console.log("Logged in user:", user);
-
-        // Role-based navigation
-        if (user.role === 'admin') {
-            navLinks.innerHTML = `
-                <a href="#" data-page="search">Search Cocktails</a>
-                <a href="#" data-page="add">Add Cocktails</a>
-            `;
-        } else if (user.role === 'user') {
-            navLinks.innerHTML = `
-                <a href="#" data-page="search">Search Cocktails</a>
-            `;
-        } else {
-            navLinks.innerHTML = '<p>No access</p>';
-            return;
+        // Check if the user is authenticated
+        if (!pb.authStore.isValid) {
+            throw new Error("User is not authenticated");
         }
+
+        console.log("Authenticated user:", pb.authStore.model);
+
+        // Display the navigation menu with "Search Cocktails"
+        navLinks.innerHTML = `
+            <a href="#" data-page="search">Search Cocktails</a>
+        `;
 
         // Handle navigation clicks
         navLinks.addEventListener('click', (e) => {
@@ -29,15 +22,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             const page = e.target.getAttribute('data-page');
             if (page === 'search') {
                 loadSearchPage();
-            } else if (page === 'add') {
-                loadAddPage();
             }
         });
+
+        // Load the Search Cocktails page by default
+        loadSearchPage();
     } catch (error) {
-        console.error("Failed to load user data:", error);
+        console.error("Error loading dashboard:", error);
+        navLinks.innerHTML = '<p>Error: Unable to access dashboard</p>';
     }
 
-    // Load "Search Cocktails" page
+    // Function to load the Search Cocktails page
     function loadSearchPage() {
         content.innerHTML = `
             <h2>Search Cocktails</h2>
@@ -57,47 +52,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             } catch (error) {
                 console.error("Failed to fetch cocktails:", error);
                 resultsDiv.innerHTML = '<p>Error loading results</p>';
-            }
-        });
-    }
-
-    // Load "Add Cocktails" page
-    function loadAddPage() {
-        content.innerHTML = `
-            <h2>Add Cocktail</h2>
-            <form id="add-form">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" required><br>
-                <label for="ingredients">Ingredients:</label><br>
-                <textarea id="ingredients" required></textarea><br>
-                <label for="instructions">Instructions:</label><br>
-                <textarea id="instructions" required></textarea><br>
-                <button type="submit">Add Cocktail</button>
-            </form>
-            <p id="status"></p>
-        `;
-
-        const form = document.getElementById('add-form');
-        const status = document.getElementById('status');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const ingredients = document.getElementById('ingredients').value;
-            const instructions = document.getElementById('instructions').value;
-
-            try {
-                await pb.collection('Cocktails').create({
-                    Name: name,
-                    Ingredients: ingredients,
-                    Instructions: instructions,
-                });
-                status.textContent = "Cocktail added successfully!";
-                form.reset();
-            } catch (error) {
-                console.error("Failed to add cocktail:", error);
-                status.textContent = "Failed to add cocktail.";
             }
         });
     }
