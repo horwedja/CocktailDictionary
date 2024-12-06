@@ -28,6 +28,7 @@ export function loadFindCocktailsPage(content) {
         <!-- Button Below Rectangle Container -->
         <div style="margin-top: 60px; text-align: center;">
             <button class="search-btn" id="search-btn">Search</button>
+            <button class="search-btn" id="reset-btn">Reset Filters</button>
         </div>
 
         <!-- Hidden Results Div -->
@@ -36,7 +37,20 @@ export function loadFindCocktailsPage(content) {
             <div class="results-container"></div>
         </div>
     `;
+// Add event listener for the Reset button
+document.getElementById('reset-btn').addEventListener('click', () => {
+    // Clear all inputs
+    document.getElementById('ingredient1').value = '';
+    document.getElementById('ingredient2').value = '';
+    document.getElementById('garnish1').value = '';
+    document.getElementById('garnish2').value = '';
+    document.getElementById('category').value = '';
+    document.getElementById('alcoholic').value = '';
+    document.getElementById('tag').value = '';
 
+    // Hide results if any are displayed
+    document.getElementById('results').style.display = 'none';
+});
     // Hook up the Search button
     document.getElementById('search-btn').addEventListener('click', async () => {
         const criteria = {
