@@ -32,7 +32,7 @@ export function loadFindCocktailsPage(content) {
         </div>
 
         <!-- Hidden Results Div -->
-        <div id="results" style="display: none; margin-top: 20px;">
+        <div id="results" class="hidden"; margin-top: 20px;">
             <h3>Search Results</h3>
             <div class="results-container"></div>
         </div>
@@ -86,7 +86,7 @@ document.getElementById('reset-btn').addEventListener('click', () => {
         }
 
         // Show results div
-        resultsDiv.style.display = 'block';
+        resultsDiv.class = 'results-container';
         console.log("Search results:", results);
     });
 }

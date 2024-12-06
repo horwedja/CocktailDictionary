@@ -190,3 +190,16 @@ body {
     font-size: 1.2rem;
     color: #666; /* Medium gray text */
 }
+/* CSS for results visibility */
+.hidden {
+    display: none;
+}
+/* Results Container */
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    gap: 20px; /* Space between cards */
+    margin-top: 20px;
+}
+
+
