@@ -124,18 +124,15 @@ body {
     font-size: 14px;
 }
 /* Search Button Below Rectangles */
+
 .search-btn {
-    margin: 20px auto 0; /* Add spacing below the rectangle container */
     padding: 10px 20px;
     color: white;
     background-color: #3498db; /* Blue color */
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
     font-size: 1.2rem;
-    width: 20%; /* Adjust width to match your layout */
-    display: block; /* Center align */
+    cursor: pointer;
 }
 
 .search-btn:hover {

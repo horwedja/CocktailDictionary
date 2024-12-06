@@ -25,7 +25,10 @@ export function loadFindCocktailsPage(content) {
             </div>
             <div class="rectangle"><input type="text" id="tag" placeholder="Tag"></div>
         </div>
-        <button class="search-btn" id="search-btn">Search</button>
+        <!-- Button Below Rectangle Container -->
+        <div style="margin-top: 60px; text-align: center;">
+            <button class="search-btn" id="search-btn">Search</button>
+        </div>
 
         <!-- Hidden Results Div -->
         <div id="results" style="display: none; margin-top: 20px;">
