@@ -1,5 +1,6 @@
+import pb from './pocketbase.js';
+
 export function loadSearchPage(content) {
-    // Load the search form into the content div
     content.innerHTML = `
         <h2>Search Cocktails</h2>
         <form id="search-form" class="search-form">
@@ -29,11 +30,9 @@ export function loadSearchPage(content) {
     const searchForm = document.getElementById('search-form');
     const resultsDiv = document.getElementById('results');
 
-    // Event listener for form submission
     searchForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Get search criteria
         const ingredient1 = document.getElementById('ingredient1').value.toLowerCase();
         const ingredient2 = document.getElementById('ingredient2').value.toLowerCase();
         const garnish1 = document.getElementById('garnish1').value.toLowerCase();
@@ -45,7 +44,6 @@ export function loadSearchPage(content) {
         try {
             const records = await pb.collection('Cocktails').getFullList(); // Fetch all cocktails
 
-            // Filter records based on search criteria
             const filtered = records.filter(record => {
                 const matchIngredient1 = ingredient1 ? record.Ingredients.toLowerCase().includes(ingredient1) : true;
                 const matchIngredient2 = ingredient2 ? record.Ingredients.toLowerCase().includes(ingredient2) : true;
@@ -66,7 +64,6 @@ export function loadSearchPage(content) {
                 );
             });
 
-            // Display results
             if (filtered.length > 0) {
                 resultsDiv.innerHTML = `
                     <h3>Results</h3>
@@ -92,4 +89,3 @@ export function loadSearchPage(content) {
         }
     });
 }
- 
